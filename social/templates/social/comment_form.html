@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+
+
+<br>
+      <div class="card mx-auto mt-5 " style="width: 50rem;">
+
+      <div class="card-body">
+        <h5 class="card-title text-center">Comment </h5>
+         <form enctype="multipart/form-data" method="POST">
+               {% csrf_token %}
+                {% bootstrap_form form %}
+               <input type="submit" class="btn btn-primary" value="Save">
+                <a class ="btn btn-primary "style="margin:15px;" href="{% url 'social:home' %}">Back </a>
+             </form>
+        </div>
+      </div>
+
+
+
+
+
+{% endblock%}

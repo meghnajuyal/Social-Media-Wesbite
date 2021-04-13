@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="p-5">
+    <h1 >Home</h1>
+    <hr>
+    <form class="form-inline">
+      <input class="form-control mr-3" placeholder="Search" type="text" name="si" value="{{request.GET.se}}">
+      <input class="btn btn-info "type="submit"  value="Search">
+      <a class="btn btn-info ml-3 " href="{% url 'social:postCreate'%}"><span class="fa fa-plus"></span></a>
+    </form>
+
+
+
+    <div class="row ">
+    {% for post in post_list %}
+      <div class="col-md-4 my-3">
+        <div class="card h-100" style="width: 20rem;" >
+          <div class="card-header">
+            {% if post.uploaded_by.pic %}
+             <img class="rounded-circle"style="width:50px; height:50px;" src="/media/{{post.uploaded_by.pic}}" >
+             <strong>{{post.uploaded_by}}</strong>
+           {%endif%}
+          </div>
+           <img class="card-img-top img-fluid h-100 " style="width:auto;" src="/media/{{post.pic}}" alt="">
+             <div class="card-body">
+
+               <h5 class="card-title">
+                {{post.subject}}
+              </h5>
+               <p class="card-text">
+                 {{post.cr_date|date:"d/m/y"}}
+               </p>
+               {% if post.liked %}
+                  <a class="btn btn-danger btn-sm " href="{% url 'social:postdislike' pk=post.id %}">Unlike</a>
+               {%else %}
+                 <a class="btn btn-success btn-sm " href="{% url 'social:postlike' pk=post.id %}"><span class="fa fa-thumbs-up"></span></a>
+
+               {% endif%}
+               <a class="btn btn-info btn-sm"href="{% url 'social:commentadd' pk=post.id %}"><span class="fa fa-commenting-o"></span></a>
+
+               <a class="btn btn-info btn-sm my-3" href="{% url 'social:postDetail' pk=post.id %}">Read More</a>
+               {% if user.is_superuser%}
+                   <a class="btn btn-danger btn-sm  " href="{% url 'social:postDelete' pk=post.id %}" ><span class="fa fa-trash"></span></a>
+               {% endif %}
+               <br>
+               {% if post.likes %}
+                  <span class="badge badge-info"> Likes: {{post.likes}}</span>
+
+               {% endif %}
+               {% if post.comment_count %}
+                  <span class="badge badge-info"> Comments: {{post.comment_count}}</span>
+
+               {% endif %}
+
+
+             </div>
+
+          </div>
+
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

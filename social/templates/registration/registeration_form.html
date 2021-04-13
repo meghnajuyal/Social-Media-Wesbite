@@ -1,0 +1,36 @@
+{% load static%}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,intial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+  <link  rel="stylesheet" href="{% static 'style.css '%}">
+
+  </head>
+  <body class="login">
+
+
+<br>
+      <div class="card mx-auto mt-5 " style="width: 50rem;">
+
+      <div class="card-body">
+        <h5 class="card-title text-center">Fill up the form for registering </h5>
+
+         <form  method="POST">
+           {% csrf_token %}
+            {% bootstrap_form form %}
+           <input type="submit" class="btn btn-primary mybutton ml-5" value="Register">
+           <a class ="btn btn-primary mybutton my-2 " href="{% url 'social:home' %}">Back</a>
+         </form>
+        </div>
+      </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="card  p-5">
+
+  <div class="row">
+    <div class="col-md-4 offset-2">
+      {% if user.profile.pic%}
+      <img class="rounded-circle"style="width:40px; height:40px;" src="/media/{{user.profile.pic}}" >
+
+      {% else %}
+        <img class="rounded-circle"style=" height:auto;" src="/media/default.png" >
+        {% endif%}
+
+
+    </div>
+    <div class="col-md-4">
+      <p><strong> {{profile.name}}</strong></p>
+      {%  if profile.description %}
+       <p> {{profile.description}}</p>
+      {%endif %}
+
+       {%  if profile.address %}
+        <p> {{profile.address}}</p>
+       {%endif %}
+
+       {%  if profile.status %}
+       <p>{{profile.status}}</p>
+       {%endif %}
+
+       {%  if profile.contact %}
+       <p> {{profile.contact}}</p>
+       {%endif %}
+
+       {%  if profile.gender %}
+        <p>{{profile.gender}}</p>
+       {%endif %}
+
+       <a class="btn btn-dark"href="{% url 'social:home'%}">Back</a>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="card my-3">
+    <div class="card-header text-center">
+      <strong><h3>Post</h3></strong>
+
+    </div>
+    <div class="card-body">
+      <div class="row">
+        {% for post in profile.post_profile.all %}
+            <div class="col-md-3">
+             <div class="thumbnail">
+                <a  class="btn btn-light"href="{% url 'social:postDetail' pk=post.id%}">
+                <img class="img-responsive my-3"src="/media/{{post.pic}}"  style="width:100%">
+                <div class="caption">
+                  <p>{{post.subject}}</p>
+                </div>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+            <h5>No Post</h5>
+        {%endfor%}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

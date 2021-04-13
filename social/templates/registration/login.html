@@ -1,0 +1,49 @@
+{% load static%}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,intial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+  <link  rel="stylesheet" href="{% static 'style.css '%}">
+
+  </head>
+  <body class="login">
+
+
+<br>
+      <div class="card mx-auto mt-5 " style="width: 25rem;">
+
+      <div class="card-body ">
+        <h5 class="card-title  text-center ">Please Login</h5>
+
+
+            {% if form.errors%}
+            <p>Your username and password didn't match.Please try again</p>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              <input type="submit" class="btn btn-primary mx-5 mybutton" value="Login">
+            </form>
+
+        </div>
+      </div>
+
+      <div class="card center mx-auto mt-2" style="width: 25rem;">
+
+          <div class="card-body text-center">
+
+            <p>Don't have an account?<a  href="{% url 'register'%}">Register</a></p>
+          </div>
+      </div>
+
+
+  </body>
+</html>
